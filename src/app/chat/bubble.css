@@ -1,0 +1,34 @@
+.bubble {
+    margin-top: 1rem;
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+    padding: 0.5rem 0.75rem 0.25rem 0.75rem;
+}
+
+.action-bar {
+    display: flex;
+}
+
+.left-action-bar {
+    flex-direction: row;
+}
+
+.right-action-bar {
+    flex-direction: row-reverse;
+}
+
+.left-bubble {
+    align-self: flex-start;
+    background: linear-gradient(rgb(220, 220, 220), rgb(200, 200, 200));
+    color: black;
+}
+
+.right-bubble {
+    align-self: flex-end;
+    background: linear-gradient(rgb(0, 122, 255), rgb(0, 84, 177));
+    color: rgb(220, 220, 220);
+}
+
+.text {
+    margin-top: 0.2rem;
+}

@@ -1,0 +1,19 @@
+.input-container {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    padding: 0.5rem 1rem 1rem 1rem;
+}
+
+.input {
+    min-height: 4rem;
+    max-height: 6rem;
+    outline: none;
+    padding: 1rem;
+    resize: none;
+}
