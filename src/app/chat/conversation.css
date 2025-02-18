@@ -1,8 +1,31 @@
 .conversation-container {
     background-color: rgb(0, 0, 0);
-    height: 100rem;
+    height: auto;
     margin-left: auto;
     margin-right: auto;
+}
+
+.bubbles-container {
     display: flex;
     flex-direction: column;
+    padding-bottom: 8rem;
+}
+
+.input-container {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    padding: 1rem 1rem 0.5rem 1rem;
+}
+
+.input {
+    min-height: 4rem;
+    outline: none;
+    padding: 1rem;
+    resize: none;
 }

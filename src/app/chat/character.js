@@ -1,4 +1,4 @@
-import './character.css'
+import './character.css';
 
 export default function Character({ character }) {
     return (

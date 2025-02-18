@@ -2,7 +2,7 @@
 
 import { useRef, useEffect } from 'react';
 import Character from './character';
-import './navbar.css'
+import './navbar.css';
 
 export default function NavBar({ character }) {
     const navbarRef = useRef(null);
