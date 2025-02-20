@@ -4,6 +4,9 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 First, run the development server:
 
+Run this first to install the packages:
+`npm install`
+
 ```bash
 npm run dev
 # or
