@@ -101,11 +101,11 @@ export default function Conversation({ character, user }) {
     }, []);
 
     return (
-        <div className="conversation-container w-full md:w-3/4 lg:w-3/4 mt-[8rem] sm:mt-[5rem] md:mt-[5rem] lg:mt-[5rem]">
+        <div className="conversation-container w-full md:w-3/5 lg:w-3/5 mt-[5rem]">
             <div className="bubbles-container">
                 {bubbles}
             </div>
-            <div className="input-container w-full md:w-3/4 lg:w-3/4">
+            <div className="input-container w-full md:w-3/5 lg:w-3/5">
                 <textarea className="w-full rounded-xl text-lg font-normal input bg-stone-900"
                     placeholder={`Message ${character.name}...`}
                     onKeyDown={(e) => { onSendMessage(e); }}></textarea>

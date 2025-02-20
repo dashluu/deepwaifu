@@ -4,7 +4,7 @@ import './page.css';
 
 export default function Chat() {
     const character = {
-        avatar: "https://mdbcdn.b-cdn.net/img/new/avatars/2.webp",
+        avatar: "/characters/placeholder1.avif",
         name: "Character",
         creator: "Creator"
     };
