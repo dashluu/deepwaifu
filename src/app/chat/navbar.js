@@ -19,11 +19,30 @@ export default function NavBar({ ctxId, character }) {
         }
     });
 
+    async function deleteChat() {
+        try {
+            const response = await fetch("http://localhost:8000/delete-chat", {
+                method: "delete",
+                body: JSON.stringify({ ctx_id: ctxId }),
+                headers: { "Content-Type": "application/json" }
+            });
+            if (response.ok) {
+                router.push("/");
+            } else {
+                // TODO: handle error
+                console.log(response);
+            }
+        } catch (error) {
+            // TODO: handle error
+            console.log(error.message);
+        }
+    }
+
     return (
         <div className="navbar flex items-center w-full gap-4" ref={navbarRef}>
             <div className="flex-shrink-0">
                 <img src="/deepwaifu.png" alt="DeepWaifu" className="h-7 w-auto logo"
-                    onClick={function () { router.push("/"); }} />
+                    onClick={function () { deleteChat(); }} />
             </div>
             <Character character={character}></Character>
         </div>

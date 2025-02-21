@@ -51,24 +51,32 @@ export default function Home() {
   }
 
   async function newChat() {
-    const character = {
-      name: characterName,
-      avatar: avatar,
-      occupation: occupation,
-      personality: personality,
-      age: age,
-      keywords: keywords
-    }
-    const response = await fetch("http://localhost:8000/new-chat", {
-      method: "post",
-      body: JSON.stringify(character),
-      headers: { "Content-Type": "application/json" }
-    });
-    if (response.ok) {
-      const data = await response.json();
-      const params = new URLSearchParams(searchParams.toString());
-      params.set("id", data);
-      router.push("/chat?" + params.toString());
+    try {
+      const character = {
+        name: characterName,
+        avatar: avatar,
+        occupation: occupation,
+        personality: personality,
+        age: age,
+        keywords: keywords
+      }
+      const response = await fetch("http://localhost:8000/new-chat", {
+        method: "post",
+        body: JSON.stringify(character),
+        headers: { "Content-Type": "application/json" }
+      });
+      if (response.ok) {
+        const data = await response.json();
+        const params = new URLSearchParams(searchParams.toString());
+        params.set("id", data);
+        router.push("/chat?" + params.toString());
+      } else {
+        // TODO: handle error
+        console.log(response);
+      }
+    } catch (error) {
+      // TODO: handle error
+      console.log(error.message);
     }
   }
 

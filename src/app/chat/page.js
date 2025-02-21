@@ -16,18 +16,26 @@ export default function Chat() {
     });
 
     async function auth() {
-        const response = await fetch("http://localhost:8000/auth", {
-            method: "post",
-            body: JSON.stringify({ ctx_id: id }),
-            headers: { "Content-Type": "application/json" }
-        });
-        if (response.ok) {
-            const data = await response.json();
-            setCharacter({
-                avatar: data["avatar"],
-                name: data["name"],
-                creator: "Creator"
+        try {
+            const response = await fetch("http://localhost:8000/auth", {
+                method: "post",
+                body: JSON.stringify({ ctx_id: id }),
+                headers: { "Content-Type": "application/json" }
             });
+            if (response.ok) {
+                const data = await response.json();
+                setCharacter({
+                    avatar: data["avatar"],
+                    name: data["name"],
+                    creator: "Creator"
+                });
+            } else {
+                // TODO: handle error
+                console.log(response);
+            }
+        } catch (error) {
+            // TODO: handle error
+            console.log(error.message);
         }
     }
 
@@ -43,7 +51,7 @@ export default function Chat() {
 
     return (
         <div className="chat-container">
-            <NavBar ctxId={ctxId} character={character}></NavBar>
+            <NavBar ctxId={id} character={character}></NavBar>
             <Conversation ctxId={id} character={character} user={user}></Conversation>
         </div >
     );

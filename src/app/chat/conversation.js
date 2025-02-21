@@ -6,13 +6,13 @@ import "./conversation.css";
 
 export default function Conversation({ ctxId, character, user }) {
     const [bubbles, setBubbles] = useState([]);
-    const messageId = useRef(0);
+    const messageCounter = useRef(0);
     const lastBubble = useRef(null);
 
     function addMessage(message) {
         let left = message.sender === character.name;
         let avatar = left ? character.avatar : user.avatar;
-        let bubble = <Bubble ref={lastBubble} key={messageId.current} left={left} avatar={avatar} message={message}></Bubble>;
+        let bubble = <Bubble ref={lastBubble} key={messageCounter.current} left={left} avatar={avatar} message={message}></Bubble>;
         setBubbles(prevBubbles => [
             ...prevBubbles,
             bubble
@@ -27,7 +27,7 @@ export default function Conversation({ ctxId, character, user }) {
                 receiver: character.name,
                 text: text
             };
-            messageId.current += 1;
+            messageCounter.current += 1;
             addMessage(message);
             // Wait for a sec before responding
             await new Promise(resolve => setTimeout(resolve, 1000));
@@ -36,7 +36,7 @@ export default function Conversation({ ctxId, character, user }) {
                 receiver: user.name,
                 text: "Thinking..."
             };
-            messageId.current += 1;
+            messageCounter.current += 1;
             addMessage(initialReply);
             const response = await fetch("http://localhost:8000/chat", {
                 method: "post",
@@ -51,8 +51,12 @@ export default function Conversation({ ctxId, character, user }) {
                         lastBubble.current.innerHTML = replyText;
                     }
                 }
+            } else {
+                // TODO: handle error
+                console.log(response);
             }
         } catch (error) {
+            // TODO: handle error
             console.log(error.message);
         }
     }
