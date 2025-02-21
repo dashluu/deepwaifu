@@ -19,8 +19,8 @@
 
 .left-bubble {
     align-self: flex-start;
-    background: linear-gradient(rgb(255, 55, 95), rgb(211, 15, 69));
-    color: rgb(220, 220, 220);
+    background: linear-gradient(rgb(255, 55, 95), rgb(211, 45, 85));
+    color: white;
 }
 
 .right-bubble {

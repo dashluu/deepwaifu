@@ -5,7 +5,7 @@ import Character from './character';
 import './navbar.css';
 import { useRouter } from 'next/navigation';
 
-export default function NavBar({ character }) {
+export default function NavBar({ ctxId, character }) {
     const navbarRef = useRef(null);
     const router = useRouter();
 
