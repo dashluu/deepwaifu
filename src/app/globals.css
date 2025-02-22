@@ -5,12 +5,15 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --formBackground: #d4d4d4;
+
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: black;
     --foreground: #ededed;
+    --formBackground: #262626;
   }
 }
 
@@ -21,4 +24,8 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+}
+
+formContainer {
+  background-color: var(--formBackground);
 }

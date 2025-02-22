@@ -93,7 +93,7 @@ export default function Home() {
       </div>
       <div className="flex flex-col justify-center items-center">
         <h1 className="text-2xl m-3">Character Selection</h1>
-        <div className="bg-neutral-800 p-4 rounded-lg">
+        <div className="formContainer p-4 rounded-lg">
           <form method="post" onSubmit={onNewChat}>
             <div className="flex flex-col items-center">
               <fieldset className="border-2 pb-2 px-2 m-2 text-center">
