@@ -29,3 +29,7 @@ body {
 formContainer {
   background-color: var(--formBackground);
 }
+
+fieldset {
+  border-color: var(--foreground);
+}
