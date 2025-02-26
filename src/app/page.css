@@ -1,24 +1,19 @@
-/* input radio with an image right after it, aka the image radio options */
-input[type="radio"]:has(+ img) {
+.homepage-container {
     position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto;
 }
 
-input[type="radio"]+img {
-    cursor: pointer;
-    outline: none;
+.action-btn:hover {
+    background-color: rgb(220, 220, 220);
+    color: black;
+    border: 1px solid rgb(220, 220, 220);
 }
 
-input[type="radio"]:checked+img {
-    outline: 3px solid #38bdf8;
-}
-
-.keyword {
-    border-bottom: 2px solid rgb(255, 55, 95);
-}
-
-.chat-btn {
-    background: linear-gradient(rgb(255, 55, 95), rgb(211, 45, 85));
+.action-btn {
+    background-color: transparent;
+    color: rgb(220, 220, 220);
+    border: 1px solid rgb(220, 220, 220);
 }

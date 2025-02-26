@@ -15,10 +15,26 @@ input[type="radio"]:checked+img {
     outline: 3px solid #38bdf8;
 }
 
-.keyword {
+.keyword-input,
+.background-input,
+.interests-input {
     border-bottom: 2px solid rgb(255, 55, 95);
 }
 
 .chat-btn {
-    background: linear-gradient(rgb(255, 55, 95), rgb(211, 45, 85));
+    background: linear-gradient(rgb(255, 45, 85), rgb(211, 15, 69));
+    border: 1px solid rgb(211, 45, 85);
+    color: white;
+}
+
+.home-btn:hover {
+    background-color: rgb(220, 220, 220);
+    color: black;
+    border: 1px solid rgb(220, 220, 220);
+}
+
+.home-btn {
+    background-color: transparent;
+    color: rgb(220, 220, 220);
+    border: 1px solid rgb(220, 220, 220);
 }

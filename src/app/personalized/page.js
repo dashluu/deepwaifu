@@ -24,6 +24,8 @@ export default function Home() {
   const [personality, setPersonality] = useState(personalities[0]);
   const [age, setAge] = useState(18);
   const [keywords, setKeywords] = useState("");
+  const [background, setBackground] = useState("");
+  const [interests, setInterests] = useState("");
 
   const onCharacterChange = (event) => {
     const name = event.target.value;
@@ -46,13 +48,16 @@ export default function Home() {
     setAge(event.target.value);
   }
 
-  const onKeywordsChange = (event) => {
-    setKeywords(event.target.value);
+  const onBackgroundChange = (event) => {
+    setBackground(event.target.value);
   }
 
-  const goBack = (event) => {
-    event.preventDefault();
-    router.push("/");
+  const onInterestsChange = (event) => {
+    setInterests(event.target.value);
+  }
+
+  const onKeywordsChange = (event) => {
+    setKeywords(event.target.value);
   }
 
   async function newChat() {
@@ -63,7 +68,9 @@ export default function Home() {
         occupation: occupation,
         personality: personality,
         age: age,
-        keywords: keywords
+        keywords: keywords,
+        background: background,
+        interests: interests
       }
       const response = await fetch("http://localhost:8000/new-chat", {
         method: "post",
@@ -90,6 +97,10 @@ export default function Home() {
     newChat();
   }
 
+  const goHome = (event) => {
+    event.preventDefault();
+    router.push("/");
+  }
 
   return (
     <div className="p-2">
@@ -97,13 +108,9 @@ export default function Home() {
         <img src="/deepwaifu.png" alt="DeepWaifu" width="400" height="400" />
       </div>
       <div className="flex flex-col justify-center items-center">
-        <h1 className="text-2xl m-3">Character Selection</h1>
-        <div className="formContainer p-4 rounded-lg">
+        <div className="form-container p-4 rounded-lg bg-stone-900">
           <form method="post" onSubmit={onNewChat}>
             <div className="flex flex-col items-center">
-              <button className="m-2 back-btn p-2 rounded-lg cursor-pointer outline-none" onClick={goBack}>
-                  Back to Home
-              </button>
               <fieldset className="border-2 pb-2 px-2 m-2 text-center">
                 <legend className="px-2">Age</legend>
                 <div className="flex gap-2">
@@ -151,13 +158,22 @@ export default function Home() {
                   })}
                 </div>
               </fieldset>
-
+              <fieldset className="border-2 pb-2 px-2 m-2 text-center">
+                <legend className="px-2">Background</legend>
+                <input className="background-input outline-none bg-transparent w-96" type="text" name="background" onChange={onBackgroundChange} />
+              </fieldset>
+              <fieldset className="border-2 pb-2 px-2 m-2 text-center">
+                <legend className="px-2">Interests</legend>
+                <input className="interests-input outline-none bg-transparent w-96" type="text" name="interests" onChange={onInterestsChange} />
+              </fieldset>
               <fieldset className="border-2 pb-2 px-2 m-2 text-center">
                 <legend className="px-2">Keywords</legend>
-                <input className="keyword outline-none bg-transparent w-96" type="text" name="keywords" onChange={onKeywordsChange} />
+                <input className="keyword-input outline-none bg-transparent w-96" type="text" name="keywords" onChange={onKeywordsChange} />
               </fieldset>
-
-              <input className="m-2 chat-btn p-2 rounded-lg cursor-pointer outline-none" type="submit" value="Let's Chat!" />
+              <div className="flex flex-row gap-1">
+                <input className="w-[7rem] m-2 chat-btn pt-2 pb-2 pl-3 pr-3 rounded-full cursor-pointer outline-none" type="submit" value="Let's Chat!" />
+                <button className="w-[7rem] home-btn m-2 pt-2 pb-2 pl-3 pr-3 rounded-full cursor-pointer outline-none" onClick={goHome}>Home</button>
+              </div>
             </div>
           </form>
         </div>

@@ -1,38 +1,18 @@
-/* input radio with an image right after it, aka the image radio options */
-input[type="radio"]:has(+ img) {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-input[type="radio"]+img {
-    cursor: pointer;
-    outline: none;
-}
-
-input[type="radio"]:checked+img {
-    outline: 3px solid #38bdf8;
-}
-
-.keyword {
-    border-bottom: 2px solid rgb(255, 55, 95);
-}
-
-.chat-btn {
-    background: linear-gradient(rgb(255, 55, 95), rgb(211, 45, 85));
-}
-
 .premade-container {
-    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto;
 }
 
-.premade-container img {
+.premade-container .avatar {
     transition: transform 0.2s;
-    margin: 0 20px; /* Add margin to create space between images */
+    margin: 0 20px;
+    /* Add margin to create space between images */
 }
 
-.premade-container img:hover {
+.premade-container .avatar:hover {
     transform: scale(1.1);
 }
 
@@ -41,15 +21,22 @@ input[type="radio"]:checked+img {
     margin-top: 1rem;
 }
 
-.chat-btn {
-    background-color: #0070f3;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    cursor: pointer;
+.listen-btn:hover,
+.home-btn:hover {
+    background-color: rgb(220, 220, 220);
+    color: black;
+    border: 1px solid rgb(220, 220, 220);
 }
 
-.chat-btn:hover {
-    background-color: #005bb5;
+.listen-btn,
+.home-btn {
+    background-color: transparent;
+    color: rgb(220, 220, 220);
+    border: 1px solid rgb(220, 220, 220);
+}
+
+.chat-btn {
+    background: linear-gradient(rgb(255, 45, 85), rgb(211, 15, 69));
+    border: 1px solid rgb(211, 45, 85);
+    color: white;
 }

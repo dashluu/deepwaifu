@@ -15,21 +15,16 @@ export default function HomePage() {
 
   return (
     <div className="homepage-container">
-      <div className="flex justify-center m-3">
+      <div className="flex justify-center">
         <img src="/deepwaifu.png" alt="DeepWaifu" width="400" height="400" />
       </div>
-      <div className="flex flex-col justify-center items-center">
-        <h1 className="text-2xl m-3">Welcome to DeepWaifu!</h1>
-        <button
-          className="m-2 chat-btn p-2 rounded-lg cursor-pointer outline-none"
-          onClick={navigateToPersonalized}
-        >
+      <div className="flex flex-col justify-center items-center mt-[2rem] text-lg">
+        <button className="w-[18rem] m-2 action-btn pt-2 pb-2 pl-3 pr-3 rounded-full cursor-pointer outline-none"
+          onClick={navigateToPersonalized}>
           Create Your Own Character!
         </button>
-        <button
-          className="m-2 chat-btn p-2 rounded-lg cursor-pointer outline-none"
-          onClick={navigateToPremade}
-        >
+        <button className="w-[18rem] m-2 mt-[1rem] action-btn pt-2 pb-2 pl-3 pr-3 rounded-full cursor-pointer outline-none"
+          onClick={navigateToPremade}>
           Play with pre-made characters!
         </button>
       </div>

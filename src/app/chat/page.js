@@ -11,8 +11,7 @@ export default function Chat() {
     const id = searchParams.get("id");
     const [character, setCharacter] = useState({
         avatar: "/characters/placeholder1.avif",
-        name: "",
-        creator: ""
+        name: ""
     });
 
     async function auth() {
@@ -26,8 +25,7 @@ export default function Chat() {
                 const data = await response.json();
                 setCharacter({
                     avatar: data["avatar"],
-                    name: data["name"],
-                    creator: "Creator"
+                    name: data["name"]
                 });
             } else {
                 // TODO: handle error
