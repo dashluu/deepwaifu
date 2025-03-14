@@ -23,14 +23,23 @@ export default function Conversation({ ctxId, character, user }) {
         try {
             const message = {
                 ctx_id: ctxId,
+                sender: "user",
+                receiver: "assistant",
+                content: text
+            };
+
+            console.log("Sending message:", JSON.stringify(message));
+
+            messageCounter.current += 1;
+            addMessage({
                 sender: user.name,
                 receiver: character.name,
                 text: text
-            };
-            messageCounter.current += 1;
-            addMessage(message);
+            });
+
             // Wait for a sec before responding
             await new Promise(resolve => setTimeout(resolve, 1000));
+            
             const initialReply = {
                 sender: character.name,
                 receiver: user.name,
@@ -38,26 +47,76 @@ export default function Conversation({ ctxId, character, user }) {
             };
             messageCounter.current += 1;
             addMessage(initialReply);
+
             const response = await fetch("http://localhost:8000/chat", {
                 method: "post",
                 body: JSON.stringify(message),
                 headers: { "Content-Type": "application/json" }
             });
+
+            if (!response.ok) {
+                // Get the error details from the response
+                const errorData = await response.json();
+                console.error("Error details:", errorData);
+                
+                if (lastBubble.current) {
+                    lastBubble.current.innerHTML = "Error: " + JSON.stringify(errorData);
+                }
+                return;
+            }
+
             if (response.ok) {
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
                 let replyText = "";
-                for await (const chunk of response.body) {
-                    for (const byte of chunk) {
-                        replyText += String.fromCharCode(byte);
-                        lastBubble.current.innerHTML = replyText;
+
+                try{
+                    while (true) {
+                        const { done, value } = await reader.read();
+                        if (done) break;
+                        
+                        const text = decoder.decode(value);
+                        console.log("Received chunk:", text); // Debug log
+                        
+                        // Handle different response formats
+                        if (text.includes("data: ")) {
+                            // Handle SSE format
+                            const lines = text.split("\n");
+                            for (const line of lines) {
+                                if (line.startsWith("data: ")) {
+                                    const content = line.substring(6);
+                                    if (content === "[DONE]") break;
+                                    replyText += content;
+                                }
+                            }
+                        } else {
+                            // Handle raw text format
+                            replyText += text;
+                        }
+                        
+                        // Update the bubble's text if ref is available
+                        if (lastBubble.current) {
+                            lastBubble.current.innerHTML = replyText;
+                        }
+                    }
+                } catch (error) {
+                    console.error("Error reading response:", error);
+                    if (lastBubble.current) {
+                        lastBubble.current.innerHTML = "Error reading response: " + error.message;
                     }
                 }
             } else {
-                // TODO: handle error
-                console.log(response);
+                console.error("Request failed with status:", response.status);
+                if (lastBubble.current) {
+                    lastBubble.current.innerHTML = "Error: Failed to get response";
+                }
             }
         } catch (error) {
-            // TODO: handle error
-            console.log(error.message);
+            console.log("Error sending message:", error.message);
+            // Update the message to show error
+            if (lastBubble.current) {
+                lastBubble.current.innerHTML = "Error: " + error.message;
+            }
         }
     }
 
