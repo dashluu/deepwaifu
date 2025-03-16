@@ -57,23 +57,35 @@ export default function PremadePage() {
     setCharacter(characters[index]);
   };
 
-  const handleOnAudioPlay = (index) => {
-    if (audioRefs.current[index]) {
-      audioRefs.current[index].play();
+  {characters.map((char, index) => (
+    <audio 
+      key={`audio-${index}`}
+      ref={el => audioRefs.current[index] = el} 
+      src={char.audio}
+    />
+  ))}
+
+  const handleOnAudioPlay = () => {
+    // Find the current character's index
+    const currentIndex = characters.findIndex((char) => char.name === character.name);
+    if (currentIndex !== -1 && audioRefs.current[currentIndex]) {
+      audioRefs.current[currentIndex].play();
     }
   };
 
   async function newChat() {
     try {
+      const personalityTraits = character.personality.split(',').map(trait => trait.trim()).join(', ');
+
       const response = await fetch("http://localhost:8000/new-chat", {
         method: "post",
         body: JSON.stringify({
           name: character.name,
           avatar: character.avatar,
           occupation: character.occupation,
-          personality: character.personality,
+          personality: personalityTraits,
           age: character.age,
-          keywords: "",
+          keywords: character.personality,
           background: character.background,
           interests: character.interests
         }),
@@ -85,12 +97,10 @@ export default function PremadePage() {
         params.set("id", data);
         router.push("/chat?" + params.toString());
       } else {
-        // TODO: handle error
-        console.log(response);
+        console.error("Failed to create new chat:", await response.text());
       }
     } catch (error) {
-      // TODO: handle error
-      console.log(error.message);
+      console.error("Error creating chat:", error.message);
     }
   }
 
@@ -123,7 +133,7 @@ export default function PremadePage() {
       </div>
       <div className="flex flex-row gap-3 justify-center w-[90%] m-auto mt-[1.5rem]">
         <button className="listen-btn p-2 w-[8rem] rounded-full cursor-pointer outline-none"
-          onClick={() => handleOnAudioPlay(character)}>
+          onClick={() => handleOnAudioPlay()}>
           Listen to voice
         </button>
         <button className="chat-btn p-2 w-[8rem] rounded-full cursor-pointer outline-none"
